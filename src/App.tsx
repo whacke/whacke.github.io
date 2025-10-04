@@ -1,29 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import IntroAnimation from "./components/IntroAnimation";
+import MainContent from "./components/mainContent";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [showIntro, setShowIntro] = useState(() => true);
+
+  useEffect(() => {
+    if (!showIntro) {
+      sessionStorage.setItem("introPlayed", "true");
+    }
+  }, [showIntro]);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Coming soon: Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          TODOs left unfinished: {count}
-        </button>
-      </div>
+      {/* Show animation only once per session */}
+      {showIntro && <IntroAnimation onFinish={() => setShowIntro(false)} />}
+      {!showIntro && <MainContent onFinish={() => setCount((c) => c + 1)} />}
+      
     </>
-  )
+  );
 }
 
-export default App
+export default App;
