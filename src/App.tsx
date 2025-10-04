@@ -4,7 +4,6 @@ import MainContent from "./components/mainContent";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [showIntro, setShowIntro] = useState(() => true);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ function App() {
     <>
       {/* Show animation only once per session */}
       {showIntro && <IntroAnimation onFinish={() => setShowIntro(false)} />}
-      {!showIntro && <MainContent onFinish={() => setCount((c) => c + 1)} />}
+  {!showIntro && <MainContent onClick={() => { /* parent handler (no-op) */ }} />}
       
     </>
   );

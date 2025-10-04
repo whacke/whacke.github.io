@@ -2,7 +2,7 @@ import { useState } from "react";
 import reactLogo from "../assets/react.svg";
 import viteLogo from "../../public/vite.svg";
 import "../App.css";
-export default function MainContent({ onFinish }: { onFinish: () => void }) {
+export default function MainContent({ onClick }: { onClick: () => void }) {
    const [count, setCount] = useState(0);
 
     return (
@@ -17,7 +17,7 @@ export default function MainContent({ onFinish }: { onFinish: () => void }) {
         </div>
         <h1 className="text-4xl mt-4">Coming soon: Vite + React</h1>
         <div className="card mt-4">
-          <button onClick={() => setCount((c) => c + 1)}>
+          <button onClick={() => { setCount((c) => c + 1); onClick(); }}>
             TODOs left unfinished: {count}
           </button>
         </div>
